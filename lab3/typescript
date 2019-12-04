@@ -1,0 +1,67 @@
+Script started on Fri 19 Feb 2016 10:10:04 PM EST
+(student)~/classes/3482/spring16/Labs/lab5/forStudent% valgrind --tool=memcheck --leak-check=full ngram short.txt
+==29500== Memcheck, a memory error detector
+==29500== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==29500== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==29500== Command: ngram short.txt
+==29500== 
+List of 2 word ngrams and counts
+------------------------------
+wine will, 2
+of wine, 2
+drinking of, 2
+the drinking, 2
+hear ye, 2
+after 7pm, 1
+continue after, 1
+not continue, 1
+will not, 1
+at 5pm, 1
+begin at, 1
+will begin, 1
+==29500== Mismatched free() / delete / delete []
+==29500==    at 0x4A06430: free (vg_replace_malloc.c:446)
+==29500==    by 0x40190E: NgramList::~NgramList() (NgramList.C:46)
+==29500==    by 0x4036B5: main (main.C:57)
+==29500==  Address 0x4c43060 is 0 bytes inside a block of size 24 alloc'd
+==29500==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==29500==    by 0x401E14: NgramList::insertNgram(std::string) (NgramList.C:115)
+==29500==    by 0x401854: NgramList::NgramList(int, WordList const&) (NgramList.C:30)
+==29500==    by 0x403671: main (main.C:55)
+==29500== 
+==29500== 
+==29500== HEAP SUMMARY:
+==29500==     in use at exit: 17,356 bytes in 23 blocks
+==29500==   total heap usage: 189 allocs, 166 frees, 40,104 bytes allocated
+==29500== 
+==29500== 291 (120 direct, 171 indirect) bytes in 5 blocks are definitely lost in loss record 2 of 4
+==29500==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==29500==    by 0x401E14: NgramList::insertNgram(std::string) (NgramList.C:115)
+==29500==    by 0x401854: NgramList::NgramList(int, WordList const&) (NgramList.C:30)
+==29500==    by 0x403671: main (main.C:55)
+==29500== 
+==29500== 413 bytes in 12 blocks are definitely lost in loss record 3 of 4
+==29500==    at 0x4A075FC: operator new(unsigned long) (vg_replace_malloc.c:298)
+==29500==    by 0x3C24E9C3C8: std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==29500==    by 0x3C24E9D19A: std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) (in /usr/lib64/libstdc++.so.6.0.13)
+==29500==    by 0x3C24E9D28B: std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&) (in /usr/lib64/libstdc++.so.6.0.13)
+==29500==    by 0x401DA8: NgramList::getNextNgram(__gnu_cxx::__normal_iterator<std::string const*, std::vector<std::string, std::allocator<std::string> > >, __gnu_cxx::__normal_iterator<std::string const*, std::vector<std::string, std::allocator<std::string> > >) (NgramList.C:99)
+==29500==    by 0x40180A: NgramList::NgramList(int, WordList const&) (NgramList.C:28)
+==29500==    by 0x403671: main (main.C:55)
+==29500== 
+==29500== LEAK SUMMARY:
+==29500==    definitely lost: 533 bytes in 17 blocks
+==29500==    indirectly lost: 171 bytes in 5 blocks
+==29500==      possibly lost: 0 bytes in 0 blocks
+==29500==    still reachable: 16,652 bytes in 1 blocks
+==29500==         suppressed: 0 bytes in 0 blocks
+==29500== Reachable blocks (those to which a pointer was found) are not shown.
+==29500== To see them, rerun with: --leak-check=full --show-reachable=yes
+==29500== 
+==29500== For counts of detected and suppressed errors, rerun with: -v
+==29500== ERROR SUMMARY: 14 errors from 3 contexts (suppressed: 6 from 6)
+Profiling time alarm
+(student)~/classes/3482/spring16/Labs/lab5/forStudent% exit
+exit
+
+Script done on Fri 19 Feb 2016 10:10:10 PM EST
